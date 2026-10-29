@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THITAN HALLOWEEN</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#182f78,#100b32 48%,#050610);color:#fff;font-family:Arial,sans-serif;text-align:center}
+.wrap{max-width:760px;margin:auto;padding:18px 13px 30px}
+.brand{font-size:clamp(2.4rem,10vw,4.6rem);font-weight:1000;line-height:.9;color:#fff;text-shadow:0 0 20px #168fff}
+.brand em{display:block;font-style:normal;color:#ff8b12;text-shadow:0 0 18px #ff4b00;margin-top:8px}
+.tag{font-weight:900;font-size:1.1rem;margin:15px 0}
+.panel{background:linear-gradient(145deg,#171544ee,#08091eee);border:1px solid #705aff;border-radius:20px;padding:15px;margin:14px 0;box-shadow:0 0 22px #562cff55}
+.btn{border:0;border-radius:40px;padding:15px 24px;font-weight:900;font-size:1rem;color:white;background:linear-gradient(#ffbd24,#ff6500);box-shadow:0 0 20px #ff7900aa;cursor:pointer}
+.hidden{display:none!important}
+.scene{position:relative;display:flex;align-items:center;justify-content:center;min-height:300px;border-radius:16px;overflow:hidden;background:linear-gradient(#0c1748,#07091c);border:1px solid #228dff;padding:10px}
+.scene:before{content:"🌕 🦇 🏰 🦇";position:absolute;top:8px;font-size:1.7rem;letter-spacing:5px}
+.hero{position:relative;z-index:1;display:block;width:min(85%,340px);height:310px;object-fit:contain;filter:drop-shadow(0 0 16px #00baff99);animation:bob 2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero.celebrate{animation:pop .7s ease-in-out 2}
+@keyframes pop{50%{transform:scale(1.1) rotate(5deg)}}
+.instruction{color:#d6d9ff;margin:12px 0}
+.costumes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.costume{min-width:0;padding:5px;border:1px solid #3b75ff;border-radius:13px;color:#fff;background:#101331;font-weight:900;cursor:pointer;touch-action:manipulation}
+.costume img{display:block;width:100%;height:120px;object-fit:cover;object-position:center;border-radius:8px;margin-bottom:7px}
+.costume span{font-size:.82rem}
+.costume:disabled{opacity:.45}
+.costume.selected{border:2px solid #00ff8c;box-shadow:0 0 16px #00ff8c88}
+.hint{font-size:.9rem;color:#c8c8ee}
+.prize{border-color:#ff7b16;box-shadow:0 0 26px #ff5c1d55}
+.prize h2{color:#ff9d16}
+.amount{font-size:clamp(4rem,17vw,6.5rem);font-weight:1000;line-height:1;color:#ffad20;text-shadow:0 0 20px #ff5200}
+.conditions{text-align:left;line-height:1.5;font-size:.9rem;padding:12px;border:1px solid #7e58ff;border-radius:12px;margin-top:15px}
+.conditions p{margin:8px 0;border-bottom:1px solid #ffffff18;padding-bottom:7px}
+.wa{display:block;text-decoration:none;color:#fff;font-weight:1000;background:linear-gradient(#16ff6e,#008a38);border:2px solid #7dffae;border-radius:999px;padding:16px 10px;margin:18px auto 5px;box-shadow:0 0 24px #00ff6e88;max-width:420px}
+.foot{color:#ff9d19;font-weight:1000;letter-spacing:2px;margin-top:22px}
+@media(min-width:600px){.costume img{height:155px}.scene{min-height:360px}.hero{height:340px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<section id="welcome">
+<div class="brand">THITAN <em>HALLOWEEN</em></div>
+<div class="tag">⚔️ ¡DISFRAZÁ A THITAN! 🎃</div>
+<div class="scene"><img class="hero" src="espada.png" alt="Espada animada THITAN"></div>
+<p>¡Arrastrá un disfraz hasta THITAN o tocá el que quieras!</p>
+<button class="btn" id="start">🎮 INICIAR JUEGO</button>
+</section>
+
+<section id="game" class="hidden">
+<div class="brand">THITAN <em>HALLOWEEN</em></div>
+<div class="tag">🎃 ¡DISFRAZÁ A THITAN! 🎃</div>
+<div class="scene" id="dropzone">
+<img id="hero" class="hero" src="espada.png" alt="Thitan, espada animada">
+</div>
+<p id="dropHint" class="instruction">Mantené presionado un disfraz y arrastralo hasta THITAN, o tocá una opción.</p>
+<div class="costumes">
+<button class="costume" data-name="Vampiro" data-img="vampiro.png"><img src="vampiro.png" alt="Vampiro"><span>🧛 VAMPIRO</span></button>
+<button class="costume" data-name="Bruja" data-img="bruja.png"><img src="bruja.png" alt="Bruja"><span>🧙 BRUJA</span></button>
+<button class="costume" data-name="Calabaza" data-img="calabaza.png"><img src="calabaza.png" alt="Calabaza"><span>🎃 CALABAZA</span></button>
+<button class="costume" data-name="Fantasma" data-img="fantasma.png"><img src="fantasma.png" alt="Fantasma"><span>👻 FANTASMA</span></button>
+<button class="costume" data-name="Esqueleto" data-img="esqueleto.png"><img src="esqueleto.png" alt="Esqueleto"><span>💀 ESQUELETO</span></button>
+<button class="costume" data-name="Mago" data-img="mago.png"><img src="mago.png" alt="Mago"><span>🧙‍♂️ MAGO</span></button>
+</div>
+<p class="hint">Solo podés elegir un disfraz.</p>
+</section>
+
+<section id="result" class="hidden">
+<div class="brand">THITAN <em>HALLOWEEN</em></div>
+<h2>🎉 ¡FELICIDADES!</h2>
+<p>¡Descubriste tu premio sorpresa!</p>
+<div class="scene"><img id="resultHero" class="hero" src="calabaza.png" alt="Thitan disfrazado"></div>
+<div class="panel prize">
+<h2>🎁 TU PREMIO ES</h2>
+<div class="amount">30%</div>
+<h3>DE BONIFICACIÓN EN TU PRÓXIMA CARGA</h3>
+<div class="conditions">
+<strong>🎃 CONDICIONES DE TU PREMIO 🎃</strong>
+<p>🎁 Sin mínimo de carga</p>
+<p>💰 Tope de bonificación: $30.000</p>
+<p>🔄 Para retirar con bono debés duplicar la bonificación</p>
+<p>🚫 Bono no válido para ruleta</p>
+<p>🖥️ Válido para una sola plataforma</p>
+<p>💳 Una sola carga</p>
+<p>📱 Un solo número</p>
+</div>
+</div>
+<a class="wa" id="whatsapp" target="_blank" rel="noopener">🟢 RECLAMÁ TU PREMIO POR WHATSAPP<br>📲 1141674565</a>
+<div class="foot">👑 THITAN HALLOWEEN 👑</div>
+</section>
+</main>
+
+<script>
+const $=id=>document.getElementById(id);
+const costumes=[...document.querySelectorAll(".costume")];
+let selected=false;
+let dragging=null;
+
+$("start").addEventListener("click",()=>{
+  $("welcome").classList.add("hidden");
+  $("game").classList.remove("hidden");
+});
+
+function choose(btn){
+  if(selected)return;
+  selected=true;
+  const name=btn.dataset.name;
+  const img=btn.dataset.img;
+
+  costumes.forEach(b=>{
+    b.disabled=true;
+    b.classList.toggle("selected",b===btn);
+  });
+
+  $("hero").src=img;
+  $("hero").alt="Thitan disfrazado de "+name;
+  $("hero").classList.add("celebrate");
+  $("dropHint").textContent="✨ ¡THITAN AHORA ES "+name.toUpperCase()+"! ✨";
+
+  setTimeout(()=>{
+    $("game").classList.add("hidden");
+    $("result").classList.remove("hidden");
+    $("resultHero").src=img;
+    $("whatsapp").href=
+      "https://wa.me/5491141674565?text="+
+      encodeURIComponent("Hola, elegí el disfraz de "+name+
+      " en THITAN HALLOWEEN. Vengo a reclamar mi premio sorpresa del 30%.");
+  },900);
+}
+
+costumes.forEach(btn=>{
+  btn.addEventListener("click",()=>choose(btn));
+  btn.draggable=true;
+  btn.addEventListener("dragstart",()=>dragging=btn);
+});
+
+$("dropzone").addEventListener("dragover",e=>e.preventDefault());
+$("dropzone").addEventListener("drop",e=>{
+  e.preventDefault();
+  if(dragging)choose(dragging);
+});
+</script>
+</body>
+</html>
